@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="../components/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+<body>
+    <div class="imageContainer">
+        <div class="slideImages">
+            <img src="https://placehold.co/600x400" alt="Sign Up Image">
+            <img src="https://placehold.co/600x400" alt="Sign Up Image">
+            <img src="https://placehold.co/600x400" alt="Sign Up Image">
+        </div>
+        <div class="caroselBtnLeft-Right-Container">
+            <button class="carouselMoveBtn previous"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="carouselMoveBtn next"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <div class="formContainer">
+        <div class="languageSelector">
+            <select name="languageSelector" id="langSel">
+                <option>English</option>
+                <option>日本語</option>
+                <option>Español</option>
+            </select>
+            <i class="fa-solid fa-language"></i>
+        </div>
+        <h1>Sign Up</h1>
+        <form action="../pages/Home.html" method="post">
+
+            <div class="containerInput">
+                <input type="email" id="email" name="email" placeholder=" " required>
+                <label for="email">Email</label>
+            </div>
+
+            <div class="containerInput">
+                <input type="text" id="username" name="username" placeholder=" " required>
+                <label for="username">Username</label>
+            </div>
+
+            <div class="containerInput birthDateContainer">
+                <p class="staticLabel">Birth Date:</p>
+                <div class="birthDate">
+                    <select name="Year" id="year">
+                        <option value="" disabled selected>Year</option>
+                    </select>
+                    <select name="Month" id="month">
+                        <option value="" disabled selected>Month</option>
+                    </select>
+                    <select name="Day" id="day">
+                        <option value="" disabled selected>Day</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="containerInput">
+                <input type="password" id="password" name="password" placeholder=" " required>
+                <label for="password">Password</label>
+                <p class="showPswrd" id="showPswrdid">Show</p>
+            </div>
+
+            <div class="containerInput">
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder=" " required>
+                <label for="confirmPassword">Confirm Password</label>
+                <p class="showPswrd" id="showPswrdid">Show</p>
+            </div>
+
+            <div class="pscCont">
+                <p id="pscTxt" style="font-weight: bold; color: black;">Strength:</p>
+                <div id="strengthBar" class="strength-bar">
+                <div id="strengthFill" class="strength-fill"></div>
+            </div>
+            <span id="strengthLabel" class="strength-label"></span>
+            </div>
+
+            <div class="termsContainer">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the <a href="#">Terms and Conditions</a></label>
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
+        <br>
+        <p id="registerText">Already have an account? <a href="../pages/index.html" id="registerLink">Login here</a>.</p>
+    </div>
+
+    <script src="../components/functions.js"></script>
+</body>
+</html>

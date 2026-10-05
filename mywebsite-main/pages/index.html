@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../components/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+<body>
+    <div class="imageContainer">
+        <div class="slideImages">
+            <img src="https://placehold.co/600x400" alt="Login Image">
+            <img src="https://placehold.co/600x400" alt="Login Image">
+            <img src="https://placehold.co/600x400" alt="Login Image">
+        </div>
+        <div class="caroselBtnLeft-Right-Container">
+            <button class="carouselMoveBtn previous"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="carouselMoveBtn next"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <div class="formContainer">
+        <div class="languageSelector">
+            <select name="languageSelector" id="langSel">
+                <option>English</option>
+                <option>日本語</option>
+                <option>Español</option>
+            </select>
+            <i class="fa-solid fa-language"></i>
+        </div>
+        <h1>Login</h1>
+        <form action="../pages/Home.html" method="post">
+            <div class="containerInput">
+                <input type="text" id="username" name="username" placeholder=" " required>
+                <label for="username">Username</label>
+            </div>
+            <div class="containerInput">
+                <input type="password" id="password" name="password" placeholder=" " required>
+                <label for="password">Password</label>
+                <p class="showPswrd" id="showPswrdid">Show</p>
+            </div>
+            <div class="keepLogIn-ForgotPassword-Wrapper">
+            <input type="checkbox" class="keepMeLoggedInCheckbox" name="keepMeLoggedIn">
+            <p>Keep me logged in</p>
+
+            <div class="separatorLink-Checkmark"></div>
+
+            <a href="#" id="passwordReset">Forgot Password?</a>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <br>
+        <p id="registerText">Don't have an account? <a href="../pages/signUp.html" id="registerLink">Register here</a>.</p>
+    </div>
+
+    <script src="../components/functions.js"></script>
+</body>
+</html>
