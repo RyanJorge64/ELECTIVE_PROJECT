@@ -16,7 +16,6 @@ let confirmPswrd = document.getElementById('confirmPassword'); //confirm passwor
 document.addEventListener('DOMContentLoaded', () => {
 
     /* categories */
-    const categoryList = document.querySelector('.unorderedList-Categories');
     const categories = [
         { name: 'Home', slug: 'home' },
         { name: 'New Arrivals', slug: 'new-arrivals' },
@@ -26,7 +25,46 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Sale', slug: 'sale' },
     ];
 
-    if (categoryList) {
+    const renderCategoryLinks = (container, { includeHome = false } = {}) => {
+        if (!container) return;
+
+        const list = document.createElement('ul');
+        list.className = container.classList.contains('mobileSidebarNav') ? 'mobileSidebarCategoryList' : 'unorderedList-Categories';
+
+        const items = includeHome ? [
+            { name: 'Home', slug: 'home' },
+            ...categories
+        ] : categories;
+
+        items.forEach(category => {
+            const item = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = `Home.html?category=${encodeURIComponent(category.slug)}`;
+            link.textContent = category.name;
+            item.append(link);
+            list.append(item);
+        });
+
+        container.append(list);
+    };
+
+    const desktopCategoryList = document.querySelector('.unorderedList-Categories');
+    if (desktopCategoryList) {
+        renderCategoryLinks(desktopCategoryList, { includeHome: false });
+    }
+
+    const mobileSidebarNav = document.querySelector('.mobileSidebarNav');
+    if (mobileSidebarNav) {
+        const section = document.createElement('div');
+        section.className = 'mobileSidebarCategoryGroup';
+
+        const title = document.createElement('span');
+        title.className = 'mobileSidebarSectionTitle';
+        title.textContent = 'Browse by category';
+
+        const categoryList = document.createElement('ul');
+        categoryList.className = 'mobileSidebarCategoryList';
+
         categories.forEach(category => {
             const item = document.createElement('li');
             const link = document.createElement('a');
@@ -35,17 +73,21 @@ document.addEventListener('DOMContentLoaded', () => {
             item.append(link);
             categoryList.append(item);
         });
+
+        section.append(title, categoryList);
+        mobileSidebarNav.append(section);
     }
 
     /* ============ Search Clear Button ============ */
-    const searchForm = document.querySelector('.searchBoxFormWrapper');
-    const searchInput = document.querySelector('.searchInputElement');
-    const searchClearButton = document.querySelector('.searchClearButton');
+    document.querySelectorAll('.searchBoxFormWrapper').forEach((searchForm) => {
+        const searchInput = searchForm.querySelector('.searchInputElement');
+        const searchClearButton = searchForm.querySelector('.searchClearButton');
 
-    if (searchForm && searchInput && searchClearButton) {
-        function updateSearchClearButton() {
+        if (!searchInput || !searchClearButton) return;
+
+        const updateSearchClearButton = () => {
             searchForm.classList.toggle('has-query', searchInput.value.length > 0);
-        }
+        };
 
         searchInput.addEventListener('input', updateSearchClearButton);
         searchClearButton.addEventListener('click', () => {
@@ -55,6 +97,121 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         updateSearchClearButton();
+    });
+
+    document.querySelectorAll('.footerAccTrigger').forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+            const item = trigger.closest('.footerAccordionItem');
+            if (!item) return;
+
+            const isOpen = item.classList.contains('open');
+
+            document.querySelectorAll('.footerAccordionItem').forEach((accordionItem) => {
+                accordionItem.classList.remove('open');
+                const button = accordionItem.querySelector('.footerAccTrigger');
+                if (button) {
+                    button.setAttribute('aria-expanded', 'false');
+                    const icon = button.querySelector('.footerAccIcon');
+                    if (icon) icon.textContent = '+';
+                }
+            });
+
+            if (!isOpen) {
+                item.classList.add('open');
+                trigger.setAttribute('aria-expanded', 'true');
+                const icon = trigger.querySelector('.footerAccIcon');
+                if (icon) icon.textContent = '−';
+            }
+        });
+    });
+
+    const mobileHeader = document.querySelector('.headerMobile');
+    const mobileSearchToggle = document.querySelector('.mobileSearchToggle');
+    const mobileSearchOverlay = document.querySelector('.mobileSearchOverlay');
+    const mobileSearchInput = mobileSearchOverlay ? mobileSearchOverlay.querySelector('.searchInputElement') : null;
+
+    if (mobileHeader && mobileSearchToggle && mobileSearchOverlay) {
+        const closeSearch = () => {
+            mobileHeader.classList.remove('search-open');
+            mobileSearchToggle.setAttribute('aria-expanded', 'false');
+            mobileSearchOverlay.setAttribute('aria-hidden', 'true');
+            if (mobileSearchInput) mobileSearchInput.blur();
+        };
+
+        const openSearch = () => {
+            mobileHeader.classList.add('search-open');
+            mobileSearchToggle.setAttribute('aria-expanded', 'true');
+            mobileSearchOverlay.setAttribute('aria-hidden', 'false');
+            setTimeout(() => {
+                if (mobileSearchInput) mobileSearchInput.focus();
+            }, 50);
+        };
+
+        mobileSearchToggle.addEventListener('click', () => {
+            if (mobileHeader.classList.contains('search-open')) {
+                closeSearch();
+            } else {
+                openSearch();
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            const clickedInside = mobileSearchOverlay.contains(event.target) || mobileSearchToggle.contains(event.target);
+            if (!clickedInside && mobileHeader.classList.contains('search-open')) {
+                closeSearch();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && mobileHeader.classList.contains('search-open')) {
+                closeSearch();
+            }
+        });
+    }
+
+    const sidebarButton = document.querySelector('.sideBarButton');
+    const sidebarPanel = document.querySelector('.mobileSidebarPanel');
+    const sidebarOverlay = document.querySelector('.mobileSidebarOverlay');
+    const sidebarCloseButton = document.querySelector('.mobileSidebarClose');
+
+    if (sidebarButton && sidebarPanel && sidebarOverlay && sidebarCloseButton) {
+        const openSidebar = () => {
+            document.body.classList.add('sidebar-open');
+            sidebarPanel.classList.add('open');
+            sidebarPanel.setAttribute('aria-hidden', 'false');
+            sidebarOverlay.classList.add('visible');
+            sidebarOverlay.setAttribute('aria-hidden', 'false');
+
+            if (mobileHeader && mobileHeader.classList.contains('search-open') && mobileSearchToggle) {
+                mobileSearchToggle.click();
+            }
+        };
+
+        const closeSidebar = () => {
+            document.body.classList.remove('sidebar-open');
+            sidebarPanel.classList.remove('open');
+            sidebarPanel.setAttribute('aria-hidden', 'true');
+            sidebarOverlay.classList.remove('visible');
+            sidebarOverlay.setAttribute('aria-hidden', 'true');
+        };
+
+        sidebarButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            if (sidebarPanel.classList.contains('open')) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        });
+
+        sidebarCloseButton.addEventListener('click', closeSidebar);
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && sidebarPanel.classList.contains('open')) {
+                closeSidebar();
+            }
+        });
     }
 
     /* ============ Slider ============ */

@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
 <body>
-    <header class="websiteHeadeer">
+    <header class="websiteHeadeer desktopHeader">
         <nav class="navigationBar">
-            <a class="brandBanner-Icon" href="./Home.html">
-                <h3>Placeholder</h3>
+            <a class="brandBanner-Btn" href="./Home.html">
+                <img class="headerImageBranding" src="../assets/images/branding/brandingHeader.png">
             </a>
 
             <a class="categoryNavLink" href="#categories">Categories</a>
@@ -46,6 +46,139 @@
             </ul>
         </nav>
     </header>
+
+    <!-- header for mobile devices -->
+
+    <header class="headerMobile">
+        <nav class="navigationBar-Mobile">
+            <div class="navigationBarInnerContainer">
+                <a class="sideBarButton" href="#" aria-label="Open menu">
+                    <i class="fa-solid fa-bars"></i>
+                </a>
+
+                <a class="brandingMobile" href="./Home.html">
+                    <img class="headerImageBranding" src="../assets/images/branding/brandingHeader.png">
+                </a>
+
+                <div class="mobileNavActions" aria-label="Mobile actions">
+                    <button class="mobileSearchToggle" type="button" aria-label="Open search" aria-expanded="false">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    </button>
+                    <a class="mobileNavIcon" href="../pages/index.html" aria-label="Account">
+                        <i class="fa-solid fa-user" aria-hidden="true"></i>
+                    </a>
+                    <a class="mobileNavIcon" href="#cart" aria-label="Cart">
+                        <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mobileSearchOverlay" aria-hidden="true">
+                <form class="searchBoxFormWrapper mobileSearchForm" autocomplete="off">
+                    <div class="searchElementContainer">
+                        <input class="searchInputElement" type="search" placeholder="Search..." aria-label="Search products">
+                    </div>
+                    <button class="searchClearButton" type="button" aria-label="Clear search">
+                        <i class="fa-regular fa-circle-xmark" aria-hidden="true"></i>
+                    </button>
+                    <button class="searchIconBtnElement" type="submit" aria-label="Search">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    </button>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <div class="mobileSidebarOverlay" aria-hidden="true"></div>
+    <aside class="mobileSidebarPanel" aria-label="Main menu" aria-hidden="true">
+        <div class="mobileSidebarHeader">
+            <span>Menu</span>
+            <button class="mobileSidebarClose" type="button" aria-label="Close menu">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav class="mobileSidebarNav" aria-label="Mobile menu links">
+            <!--empty-->
+        </nav>
+    </aside>
     <script src="../components/functions.js"></script>
+
+    <footer class="siteFooterMain">
+        <div class="footerTop">
+            <div class="footerBrandBlock">
+                <div class="footerLogo"><img class="headerImageBranding" src="../assets/images/branding/brandingHeader.png"></div>
+                <p>Thoughtful home essentials and everyday upgrades for a more comfortable life.</p>
+                <div class="footerSocials" aria-label="Social media links">
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footerColumn footerAccordionItem">
+                <button class="footerAccTrigger" type="button" aria-expanded="false">
+                    <h4>Shop</h4>
+                    <span class="footerAccIcon">+</span>
+                </button>
+                <ul>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Home Decor</a></li>
+                    <li><a href="#">Kitchen Essentials</a></li>
+                    <li><a href="#">Sale</a></li>
+                </ul>
+            </div>
+
+            <div class="footerColumn footerAccordionItem">
+                <button class="footerAccTrigger" type="button" aria-expanded="false">
+                    <h4>Support</h4>
+                    <span class="footerAccIcon">+</span>
+                </button>
+                <ul>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Warranty</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footerColumn footerAccordionItem">
+                <button class="footerAccTrigger" type="button" aria-expanded="false">
+                    <h4>Company</h4>
+                    <span class="footerAccIcon">+</span>
+                </button>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Journal</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footerNewsletter">
+                <h4>Stay in the loop</h4>
+                <p>Get product drops, style inspiration, and special offers.</p>
+                <form class="footerSignupForm">
+                    <input type="email" placeholder="Your email address" aria-label="Email address">
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footerBottom">
+            <p>© 2026 Placeholder. All rights reserved.</p>
+            <div class="paymentMethods" aria-label="Accepted payment methods">
+                <span>Visa</span>
+                <span>Mastercard</span>
+                <span>GCash</span>
+                <span>Paymaya</span>
+                <span>PayPal</span>
+                <span>Apple Pay</span>
+            </div>
+        </div>
+    </footer>
 </body> 
 </html>
